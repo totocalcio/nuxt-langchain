@@ -2,6 +2,15 @@
 import { useChat } from 'ai/vue'
 
 const { messages, input, handleInputChange, handleSubmit } = useChat()
+
+const onClick = () => {
+  const { data, error } = useFetch('/api/run')
+  if (error.value) {
+    console.error(error.value)
+    return
+  }
+  console.log(data.value)
+}
 </script>
 
 <template>
@@ -30,5 +39,6 @@ const { messages, input, handleInputChange, handleSubmit } = useChat()
         @change="handleInputChange"
       />
     </form>
+    <button type="button" @click="onClick">run</button>
   </div>
 </template>
